@@ -28,8 +28,8 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
   const handleDownloadExe = () => {
     setExeDownloading(true);
     const link = document.createElement('a');
-    link.href = '/download/SA_Brothers_Vendors_POS_Setup.exe';
-    link.download = 'SA_Brothers_Vendors_POS_Setup.exe';
+    link.href = '/download/SA_Brothers_Vendors_POS.exe';
+    link.download = 'SA_Brothers_Vendors_POS.exe';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -52,26 +52,6 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
     setTimeout(() => setZipDownloaded(false), 5000);
   };
 
-  const handleDownloadLauncher = () => {
-    const link = document.createElement('a');
-    link.href = '/windows-launcher/launch_sa_brothers_pos.bat';
-    link.download = 'launch_sa_brothers_pos.bat';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    setDownloadSuccess(true);
-    setTimeout(() => setDownloadSuccess(false), 3000);
-  };
-
-  const handleDownloadGuide = () => {
-    const link = document.createElement('a');
-    link.href = '/windows-launcher/HOW_TO_MAKE_WINDOWS_EXE.txt';
-    link.download = 'HOW_TO_MAKE_WINDOWS_EXE.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   // Render for TopBar
   if (variant === 'topbar') {
     return (
@@ -81,7 +61,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
             onClick={handleDownloadExe}
             disabled={exeDownloading}
             className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-white hover:bg-white/10 text-xs font-bold transition-all cursor-pointer active:scale-95"
-            title="1-Click Download Standalone Windows .EXE App (No localhost browser required)"
+            title="1-Click Download Standalone Windows SA_Brothers_Vendors_POS.exe"
           >
             {exeDownloaded ? (
               <>
@@ -91,14 +71,14 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
             ) : (
               <>
                 <Download className="w-3.5 h-3.5" />
-                <span>{exeDownloading ? 'Downloading...' : 'Download Windows .EXE'}</span>
+                <span>{exeDownloading ? 'Downloading...' : 'Download Windows .EXE (57 MB)'}</span>
               </>
             )}
           </button>
           <button
             onClick={() => setShowModal(true)}
             className="px-2 py-1.5 text-white/80 hover:text-white hover:bg-white/15 border-l border-white/20 text-xs font-bold transition-all cursor-pointer"
-            title="Windows Desktop App Options & Setup Guide"
+            title="Windows Desktop App Options & Instructions"
             aria-label="Windows App Options"
           >
             <Laptop className="w-3.5 h-3.5" />
@@ -118,11 +98,11 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
                     <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                       <span>Native Windows Desktop Software</span>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">
-                        No Browser Required
+                        Real .EXE • Standalone Window
                       </span>
                     </h3>
                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      Runs directly in its own isolated desktop window on Windows 10 &amp; 11 without opening Chrome, Edge, or localhost.
+                      Runs directly in its own isolated desktop window on Windows 10 &amp; 11. No browser address bar, no localhost tabs, and works 100% offline.
                     </p>
                   </div>
                 </div>
@@ -135,30 +115,30 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
               </div>
 
               <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
-                {/* Method 1: DIRECT DOWNLOAD STANDALONE .EXE INSTALLER (FEATURED) */}
+                {/* Method 1: DIRECT DOWNLOAD STANDALONE .EXE (FEATURED) */}
                 <div className="p-5 rounded-2xl border-2 border-sky-500/80 dark:border-sky-500/60 bg-gradient-to-br from-sky-50/80 to-indigo-50/40 dark:from-sky-950/40 dark:to-indigo-950/20 space-y-3 relative overflow-hidden shadow-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-sky-950 dark:text-sky-100 flex items-center gap-2">
                       <span className="w-5 h-5 rounded-full bg-sky-600 text-white flex items-center justify-center text-[10px] font-black">1</span>
-                      Single-Click Standalone Windows Installer (.EXE)
+                      Direct Standalone Executable (.EXE)
                     </span>
                     <span className="text-[10px] font-bold text-sky-700 dark:text-sky-300 bg-white/80 dark:bg-slate-800 px-2.5 py-0.5 rounded-full border border-sky-200 dark:border-sky-800">
-                      Recommended
+                      Recommended • 57 MB
                     </span>
                   </div>
 
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Double-click to set up and run. It extracts the native application files to your user profile, places an official <strong>Desktop Shortcut icon</strong>, and opens directly in its own desktop window. <strong>No browser address bars or localhost tabs!</strong>
+                    A true 64-bit Windows executable (<code className="font-mono font-bold text-sky-700 dark:text-sky-300">SA_Brothers_Vendors_POS.exe</code>). Double-click to run immediately on any Windows PC. It automatically opens the POS in a clean, dedicated application window — <strong>not in your web browser, no localhost errors!</strong>
                   </p>
 
                   <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600 dark:text-slate-400 pt-1">
                     <div className="flex items-center gap-1.5">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      <span>Dedicated Desktop GUI Window</span>
+                      <span>Opens in dedicated app window</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <HardDrive className="w-3.5 h-3.5 text-emerald-500" />
-                      <span>Auto Desktop Shortcut Icon</span>
+                      <span>Saves data directly to your PC</span>
                     </div>
                   </div>
 
@@ -171,12 +151,12 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
                       {exeDownloaded ? (
                         <>
                           <Check className="w-4 h-4 text-emerald-300" />
-                          <span>Downloaded! Double-click SA_Brothers_Vendors_POS_Setup.exe</span>
+                          <span>Downloaded! Double-click SA_Brothers_Vendors_POS.exe to open</span>
                         </>
                       ) : (
                         <>
                           <Download className="w-4 h-4" />
-                          <span>{exeDownloading ? 'Starting Download...' : 'Download SA_Brothers_Vendors_POS_Setup.exe (1-Click Run)'}</span>
+                          <span>{exeDownloading ? 'Starting Download...' : 'Download SA_Brothers_Vendors_POS.exe (57 MB)'}</span>
                         </>
                       )}
                     </button>
@@ -191,18 +171,18 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
                       Portable Desktop App Folder (.ZIP)
                     </span>
                     <span className="text-[10px] font-bold text-slate-700 dark:text-slate-400 bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded-full">
-                      112 MB • Portable
+                      24 MB Compressed
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Prefer a portable zip folder? Download the zip archive, right-click &gt; <strong>Extract All</strong>, then double-click <code className="font-mono font-bold text-sky-600 dark:text-sky-400">SA_Brothers_Vendors_POS.exe</code> inside the folder to run without installing anything.
+                    Prefer a zipped package? Download the zip archive, right-click &gt; <strong>Extract All</strong>, then double-click <code className="font-mono font-bold text-sky-600 dark:text-sky-400">SA_Brothers_Vendors_POS.exe</code> to run anywhere (even on a USB flash drive).
                   </p>
                   <button
                     onClick={handleDownloadZip}
                     className="w-full py-2.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Download className="w-4 h-4" />
-                    <span>{zipDownloaded ? 'Downloaded!' : 'Download Portable Package (.ZIP)'}</span>
+                    <span>{zipDownloaded ? 'Downloaded!' : 'Download Portable Package (.ZIP • 24 MB)'}</span>
                   </button>
                 </div>
 
@@ -218,7 +198,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Installs the POS into your Windows Start Menu, Desktop, and Taskbar. Opens in an isolated native window without browser address bars.
+                    Pins the POS into your Windows Start Menu, Desktop, and Taskbar. Opens in an isolated native window without browser address bars.
                   </p>
                   {isInstallable ? (
                     <button
@@ -238,48 +218,16 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
                   )}
                 </div>
 
-                {/* Method 3: Download Windows Batch / Standalone Launcher */}
-                <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/30 space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                      <span className="w-5 h-5 rounded-full bg-slate-700 text-white flex items-center justify-center text-[10px]">3</span>
-                      Windows Double-Click Desktop Launcher (.bat)
-                    </span>
+                {/* How to Run Instructions */}
+                <div className="p-4 rounded-2xl border border-emerald-200 dark:border-emerald-800/60 bg-emerald-50/40 dark:bg-emerald-950/20 space-y-2">
+                  <div className="text-xs font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    How to Open Like Other Windows Apps
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Download our ready-made launcher script. Double-clicking it automatically creates a desktop shortcut icon and launches the POS full screen in application mode.
-                  </p>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={handleDownloadLauncher}
-                      className="flex-1 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>{downloadSuccess ? 'Downloaded!' : 'Download Launcher (.bat)'}</span>
-                    </button>
-                    <button
-                      onClick={handleDownloadGuide}
-                      className="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold hover:bg-slate-100 transition-colors flex items-center gap-1.5 cursor-pointer"
-                      title="Download text instructions on converting to .exe"
-                    >
-                      <FileCode className="w-3.5 h-3.5 text-slate-500" />
-                      <span>.EXE Guide</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Method 4: Convert to single .exe via Windows IExpress */}
-                <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/30 space-y-2">
-                  <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-slate-700 text-white flex items-center justify-center text-[10px]">4</span>
-                    How to Package into a Custom .EXE via Windows IExpress (Built-in)
-                  </div>
-                  <ol className="text-xs text-slate-600 dark:text-slate-300 list-decimal list-inside space-y-1 pl-1 leading-relaxed">
-                    <li>Press <kbd className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-[11px]">Win + R</kbd>, type <code className="text-sky-600 font-mono font-bold">iexpress</code> and press Enter.</li>
-                    <li>Choose <em>Create new Self Extraction Directive</em> &gt; <em>Extract files and run command</em>.</li>
-                    <li>Add <code className="text-sky-600 font-mono">launch_sa_brothers_pos.bat</code> as the package file.</li>
-                    <li>Set Install Program to: <code className="text-sky-600 font-mono">cmd /c launch_sa_brothers_pos.bat</code>.</li>
-                    <li>Save output as <code className="text-emerald-600 font-mono font-bold">SA_Brothers_POS.exe</code> on your Desktop!</li>
+                  <ol className="text-xs text-slate-600 dark:text-slate-300 list-decimal list-inside space-y-1.5 pl-1 leading-relaxed">
+                    <li>Download or pull <code className="text-emerald-700 dark:text-emerald-300 font-mono font-bold">SA_Brothers_Vendors_POS.exe</code> (also tracked in your GitHub repository).</li>
+                    <li>Double-click the <code className="text-emerald-700 dark:text-emerald-300 font-mono font-bold">.exe</code> file directly on your computer.</li>
+                    <li>The POS immediately opens in its own window with your data safely stored in <code className="font-mono text-[11px]">local_database/</code>.</li>
                   </ol>
                 </div>
               </div>
@@ -309,10 +257,10 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
           </div>
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-              Windows Software &amp; Desktop App Integration
+              Windows Desktop Software (.EXE)
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Run this POS as an offline-capable, standalone Windows application (.exe) or desktop app
+              Run this POS as an offline-capable, standalone Windows application (.exe) without opening browser tabs
             </p>
           </div>
         </div>
@@ -336,16 +284,38 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold">
-                {exeDownloaded ? '✓ Downloaded!' : 'Download Windows .EXE'}
+                {exeDownloaded ? '✓ Downloaded!' : 'Download .EXE (57 MB)'}
               </span>
               <Download className="w-4 h-4 shrink-0" />
             </div>
             <div className="text-[11px] text-sky-100 mt-1 leading-snug">
-              Standalone 64-bit executable (72 MB). Double-click to run on Windows 10/11.
+              SA_Brothers_Vendors_POS.exe — Double-click to run directly in its own app window.
             </div>
           </div>
           <div className="mt-3 text-[10px] font-bold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded w-fit">
             Native Offline EXE
+          </div>
+        </button>
+
+        {/* Portable ZIP Package download */}
+        <button
+          type="button"
+          onClick={handleDownloadZip}
+          className="p-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl text-left transition-colors flex flex-col justify-between cursor-pointer"
+        >
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-900 dark:text-white">
+                {zipDownloaded ? '✓ Downloaded!' : 'Download Portable (.ZIP)'}
+              </span>
+              <Download className="w-4 h-4 text-slate-600 dark:text-slate-400 shrink-0" />
+            </div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+              Complete app folder with SA_Brothers_Vendors_POS.exe. Unzip &amp; run.
+            </div>
+          </div>
+          <div className="mt-3 text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded w-fit">
+            Portable 24 MB
           </div>
         </button>
 
@@ -374,28 +344,6 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 't
           </div>
           <div className="mt-3 text-[10px] font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400 bg-sky-100 dark:bg-sky-900/60 px-2 py-0.5 rounded w-fit">
             Browser PWA
-          </div>
-        </button>
-
-        {/* Portable ZIP Package download */}
-        <button
-          type="button"
-          onClick={handleDownloadZip}
-          className="p-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl text-left transition-colors flex flex-col justify-between cursor-pointer"
-        >
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900 dark:text-white">
-                {zipDownloaded ? '✓ Downloaded!' : 'Download Portable (.ZIP)'}
-              </span>
-              <Download className="w-4 h-4 text-slate-600 dark:text-slate-400 shrink-0" />
-            </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
-              Complete app folder with SA_Brothers_Vendors_POS.exe. Unzip &amp; run.
-            </div>
-          </div>
-          <div className="mt-3 text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded w-fit">
-            Portable 112 MB
           </div>
         </button>
       </div>

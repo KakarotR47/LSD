@@ -1,24 +1,18 @@
 ================================================================================
-   SA BROTHERS VENDORS - WINDOWS SOFTWARE & .EXE CONVERSION GUIDE
+   SA BROTHERS VENDORS - STANDALONE WINDOWS APP (.EXE) GUIDE
 ================================================================================
 
-This guide provides 3 easy ways to run and package this software as a native
-Windows executable (.exe) on your shop computer:
+SA_Brothers_Vendors_POS.exe is already fully compiled and ready to use!
 
 --------------------------------------------------------------------------------
-METHOD 1: ONE-CLICK NATIVE WINDOWS APP INSTALLATION (RECOMMENDED)
+METHOD 1: DOUBLE-CLICK SA_Brothers_Vendors_POS.exe (READY TO RUN)
 --------------------------------------------------------------------------------
-1. Open the POS software in Microsoft Edge or Google Chrome on your Windows PC:
-   http://localhost:3000
-2. In the top navigation bar of the POS, click:
-   "Install as Windows App"
-   OR in Edge/Chrome's address bar, click the [Install App] icon.
-3. Click "Install".
-4. Windows will automatically create:
-   - A desktop shortcut icon on your Windows Desktop
-   - A Start Menu tile and Taskbar pinning option
-   - An isolated application window (no URL bar, no tabs) that looks and behaves
-     identically to a native Windows .exe software!
+1. Double-click "SA_Brothers_Vendors_POS.exe" located in the root of this folder
+   or downloaded from the app.
+2. The POS immediately opens in its own clean desktop window (no browser tabs,
+   no address bars, and no localhost connection errors).
+3. All your shop data is automatically and securely stored in "local_database/".
+4. Works 100% offline without needing internet.
 
 --------------------------------------------------------------------------------
 METHOD 2: CONVERT TO STANDALONE .EXE USING BUILT-IN WINDOWS IEXPRESS

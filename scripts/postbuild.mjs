@@ -12,7 +12,13 @@ const foundSource = candidateSources.find((src) => fs.existsSync(src));
 
 if (foundSource) {
   console.log(`[postbuild] Found Windows binary at ${foundSource}`);
-  const targetDirs = ['dist', 'build', 'public', 'public/download'];
+  const targetDirs = [
+    'dist',
+    'build',
+    'public',
+    'public/download',
+    'release/SA_Brothers_Vendors_POS-win32-x64'
+  ];
   targetDirs.forEach((dir) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     const dest = path.resolve(dir, 'SA_Brothers_Vendors_POS.exe');
@@ -33,6 +39,14 @@ if (foundSource) {
       console.log(`[postbuild] Synced to root ${rootDest}`);
     } catch {}
   }
+
+  // Also maintain SA_Brothers_Vendors_POS_Setup.exe alias
+  const setupTargets = ['SA_Brothers_Vendors_POS_Setup.exe', 'public/download/SA_Brothers_Vendors_POS_Setup.exe', 'public/SA_Brothers_Vendors_POS_Setup.exe', 'dist/SA_Brothers_Vendors_POS_Setup.exe'];
+  setupTargets.forEach((target) => {
+    try {
+      fs.copyFileSync(foundSource, path.resolve(target));
+    } catch {}
+  });
 } else {
   console.log('[postbuild] Note: Windows executable not found yet. Run "npm run build:exe" to compile it.');
 }

@@ -527,16 +527,23 @@ async function startServer() {
     });
 
     import('child_process').then(({ spawn, exec }) => {
+      const userProfileDataDir = path.join(APP_DATA_DIR, '.pos-app-profile');
       if (foundPath) {
         console.log(`[OK] Opening POS standalone application window: ${foundPath}`);
-        const child = spawn(foundPath, [`--app=${url}`, '--window-size=1440,900'], {
-          detached: true,
-          stdio: 'ignore',
-        });
+        const child = spawn(
+          foundPath,
+          [`--app=${url}`, '--window-size=1440,900', `--user-data-dir=${userProfileDataDir}`],
+          {
+            detached: true,
+            stdio: 'ignore',
+          }
+        );
         child.unref();
       } else {
-        console.log(`[INFO] Opening default browser at ${url}`);
-        exec(`cmd.exe /c start "" "${url}"`);
+        console.log(`[INFO] Spawning POS application window via shell command...`);
+        exec(
+          `cmd.exe /c start msedge --app="${url}" --window-size=1440,900 --user-data-dir="${userProfileDataDir}" || start chrome --app="${url}" --window-size=1440,900 || start "" "${url}"`
+        );
       }
     }).catch(() => {});
   }

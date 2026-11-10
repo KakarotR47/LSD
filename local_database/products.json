@@ -54,14 +54,14 @@
     "barcode": "8901001004",
     "category": "Court Items",
     "unit": "sheet",
-    "costPrice": 480,
-    "sellingPrice": 500,
-    "currentStock": 120,
+    "costPrice": 560,
+    "sellingPrice": 750,
+    "currentStock": 0,
     "initialStock": 150,
     "minStockThreshold": 20,
-    "totalSold": 30,
+    "totalSold": 150,
     "description": "Rs. 500 Legal Deed & Stamp Paper Sheet",
-    "updatedAt": "2026-11-09T19:15:49.830Z"
+    "updatedAt": "2026-11-10T21:55:48.607Z"
   },
   {
     "id": "court-v5-005",

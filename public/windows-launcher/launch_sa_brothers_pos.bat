@@ -8,55 +8,50 @@ echo           SA BROTHERS VENDORS - POINT OF SALE DESKTOP
 echo             Court Stamp Vendors & Legal Paper Specialist
 echo ====================================================================
 echo.
-echo [1/3] Checking environment & local server status...
+cd /d "%~dp0\..\.."
 
-:: Check if server is running on port 3000
+:: 1. Check if SA_Brothers_Vendors_POS.exe exists in root
+if exist "SA_Brothers_Vendors_POS.exe" (
+    echo [OK] Found native Windows desktop application!
+    echo [INFO] Launching SA Brothers Vendors POS in standalone window...
+    start "" "SA_Brothers_Vendors_POS.exe"
+    exit /b 0
+)
+
+if exist "public\download\SA_Brothers_Vendors_POS.exe" (
+    echo [OK] Found native Windows desktop application!
+    echo [INFO] Launching SA Brothers Vendors POS in standalone window...
+    start "" "public\download\SA_Brothers_Vendors_POS.exe"
+    exit /b 0
+)
+
+:: 2. Check if server is running on port 3000
 netstat -ano | findstr :3000 >nul
 if %ERRORLEVEL% EQU 0 (
-    echo [OK] Shop POS Server is already active on port 3000.
-) else (
-    echo [INFO] Starting Local Shop POS Server in background...
-    if exist "server.ts" (
-        start /b npm run dev
-    ) else if exist "server.js" (
-        start /b node server.js
-    ) else (
-        echo [INFO] Connecting to local shop instance...
+    echo [OK] Shop POS Server is active on port 3000.
+    where msedge >nul 2>nul
+    if %ERRORLEVEL% EQU 0 (
+        start msedge --app="http://localhost:3000" --window-size=1400,900
+        exit /b 0
     )
-    timeout /t 2 /nobreak >nul
+    where chrome >nul 2>nul
+    if %ERRORLEVEL% EQU 0 (
+        start chrome --app="http://localhost:3000" --window-size=1400,900
+        exit /b 0
+    )
+    start http://localhost:3000
+    exit /b 0
 )
 
-echo [2/3] Creating Windows Desktop Shortcut...
-set SHORTCUT_SCRIPT=%TEMP%\CreatePOSShortcut.vbs
-echo Set oWS = WScript.CreateObject("WScript.Shell") > "%SHORTCUT_SCRIPT%"
-echo sLinkFile = oWS.SpecialFolders("Desktop") ^& "\SA Brothers Vendors POS.lnk" >> "%SHORTCUT_SCRIPT%"
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "%SHORTCUT_SCRIPT%"
-echo oLink.TargetPath = "msedge.exe" >> "%SHORTCUT_SCRIPT%"
-echo oLink.Arguments = "--app=http://localhost:3000" >> "%SHORTCUT_SCRIPT%"
-echo oLink.Description = "SA Brothers Vendors POS & Inventory Manager" >> "%SHORTCUT_SCRIPT%"
-echo oLink.WindowStyle = 1 >> "%SHORTCUT_SCRIPT%"
-echo oLink.Save >> "%SHORTCUT_SCRIPT%"
-cscript //nologo "%SHORTCUT_SCRIPT%"
-del "%SHORTCUT_SCRIPT%"
-echo [OK] Windows Desktop Shortcut placed on your Desktop!
-
-echo [3/3] Launching SA Brothers POS in Native Windows App Window...
-:: Attempt to launch in Microsoft Edge app mode (standard on Windows 10 & 11)
-where msedge >nul 2>nul
-if %ERRORLEVEL% EQU 0 (
-    start msedge --app="http://localhost:3000" --window-size=1400,900
-    goto DONE
-)
-
-:: Fallback to Google Chrome app mode
-where chrome >nul 2>nul
-if %ERRORLEVEL% EQU 0 (
-    start chrome --app="http://localhost:3000" --window-size=1400,900
-    goto DONE
-)
-
-:: Default browser fallback
-start http://localhost:3000
+echo.
+echo ====================================================================
+echo  [ACTION] Please run SA_Brothers_Vendors_POS.exe directly!
+echo ====================================================================
+echo  SA_Brothers_Vendors_POS.exe runs completely standalone without
+echo  needing any command prompts or browser tabs.
+echo.
+pause
+exit /b 1
 
 :DONE
 echo.

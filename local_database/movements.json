@@ -1,5 +1,16 @@
 [
   {
+    "id": "mov-1794347748607-court-v5-004",
+    "productId": "court-v5-004",
+    "productName": "Rs500 Stamp",
+    "type": "sale",
+    "quantityDelta": -120,
+    "previousStock": 120,
+    "newStock": 0,
+    "reason": "Sale RCP-20261111-0001",
+    "timestamp": "2026-11-10T21:55:48.607Z"
+  },
+  {
     "id": "mov-1794332201755-court-v5-010",
     "productId": "court-v5-010",
     "productName": "Notry/Auth Stamp",

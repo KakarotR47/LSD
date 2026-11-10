@@ -10,25 +10,18 @@ echo.
 
 cd /d "%~dp0"
 
-:: 1. If native Windows desktop app exists, run it directly!
-if exist "release\SA_Brothers_Vendors_POS-win32-x64\SA_Brothers_Vendors_POS.exe" (
-    echo [OK] Found native Windows desktop application!
-    echo [INFO] Opening SA Brothers Vendors POS window...
-    start "" "release\SA_Brothers_Vendors_POS-win32-x64\SA_Brothers_Vendors_POS.exe"
-    exit /b 0
-)
-
-if exist "SA_Brothers_Vendors_POS_Setup.exe" (
-    echo [OK] Found SA_Brothers_Vendors_POS_Setup.exe!
-    echo [INFO] Launching native Windows POS application...
-    start "" "SA_Brothers_Vendors_POS_Setup.exe"
-    exit /b 0
-)
-
+:: 1. If native Windows desktop app exists in current folder, run it directly!
 if exist "SA_Brothers_Vendors_POS.exe" (
     echo [OK] Found SA_Brothers_Vendors_POS.exe!
-    echo [INFO] Launching native Windows POS application...
+    echo [INFO] Launching native Windows POS application in standalone window...
     start "" "SA_Brothers_Vendors_POS.exe"
+    exit /b 0
+)
+
+if exist "release\SA_Brothers_Vendors_POS-win32-x64\SA_Brothers_Vendors_POS.exe" (
+    echo [OK] Found release\SA_Brothers_Vendors_POS-win32-x64\SA_Brothers_Vendors_POS.exe!
+    echo [INFO] Opening SA Brothers Vendors POS window...
+    start "" "release\SA_Brothers_Vendors_POS-win32-x64\SA_Brothers_Vendors_POS.exe"
     exit /b 0
 )
 
@@ -39,30 +32,31 @@ if exist "dist\SA_Brothers_Vendors_POS.exe" (
     exit /b 0
 )
 
-if exist "build\SA_Brothers_Vendors_POS.exe" (
-    echo [OK] Found build\SA_Brothers_Vendors_POS.exe!
+if exist "SA_Brothers_Vendors_POS_Setup.exe" (
+    echo [OK] Found SA_Brothers_Vendors_POS_Setup.exe!
     echo [INFO] Launching native Windows POS application...
-    start "" "build\SA_Brothers_Vendors_POS.exe"
+    start "" "SA_Brothers_Vendors_POS_Setup.exe"
     exit /b 0
 )
 
-:: 2. Fallback: Launch using Node/tsx if exe is not present
-echo [INFO] SA_Brothers_Vendors_POS.exe not detected in current folder.
-echo [INFO] Checking Node.js environment...
-
+:: 2. Check if developer environment is present
 where node >nul 2>nul
 if %ERRORLEVEL% NEQ 0 (
-    echo [ERROR] Neither SA_Brothers_Vendors_POS.exe nor Node.js was found.
-    echo Please make sure SA_Brothers_Vendors_POS.exe is in this folder.
+    echo.
+    echo ====================================================================
+    echo  [ACTION] Please double-click SA_Brothers_Vendors_POS.exe directly!
+    echo ====================================================================
+    echo  SA_Brothers_Vendors_POS.exe is the standalone Windows application.
+    echo  Double-clicking it runs the app immediately without web browsers.
+    echo.
     pause
     exit /b 1
 )
 
-echo [INFO] Starting POS development server...
+echo [INFO] Starting POS server...
 start /b cmd /c "npm run dev"
 timeout /t 3 /nobreak >nul
 
-:: Launch Edge or Chrome in app mode
 where msedge >nul 2>nul
 if %ERRORLEVEL% EQU 0 (
     start msedge --app="http://localhost:3000"
